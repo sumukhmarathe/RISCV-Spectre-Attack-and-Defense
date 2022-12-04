@@ -412,13 +412,17 @@ BaseCache::recvTimingReq(PacketPtr pkt)
             
     //DPRINTF(DebugFlagTestOne, "Base Timing Req\n",
     //            pkt->print());
-
+DPRINTF(Cache, "Base.cc recvTiming");
 	if (pkt->cmd == MemCmd::FlushReq)
 	{
-		DPRINTF(DebugFlagTestOne, "Chala BC, Message aaya yaha se vaha\n",
+		DPRINTF(Cache, "Chala BC, Message aaya yaha se vaha in base.cc\n",
                 pkt->print());
+                memWriteback();
+                memInvalidate();
+                
 	}
-
+else
+{
     if (pkt->cmd == MemCmd::LockedRMWWriteReq) {
         // For LockedRMW accesses, we mark the block inaccessible after the
         // read (see below), to make sure no one gets in before the write.
@@ -482,6 +486,7 @@ BaseCache::recvTimingReq(PacketPtr pkt)
             schedMemSideSendEvent(next_pf_time);
         }
     }
+}
 }
 
 void
@@ -1808,6 +1813,7 @@ BaseCache::memWriteback()
 void
 BaseCache::memInvalidate()
 {
+    DPRINTF(Cache, "reached mem invalidate in base.cc\n");
     tags->forEachBlk([this](CacheBlk &blk) { invalidateVisitor(blk); });
 }
 

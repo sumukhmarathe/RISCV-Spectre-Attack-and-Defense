@@ -407,8 +407,16 @@ void
 Cache::recvTimingReq(PacketPtr pkt)
 {
     DPRINTF(CacheTags, "%s tags:\n%s\n", __func__, tags->print());
+    
+    DPRINTF(Cache, "Cache.cc recvTiming");
 
     promoteWholeLineWrites(pkt);
+    
+    if (pkt->cmd == MemCmd::FlushReq)
+	{
+		DPRINTF(Cache, "Chala BC, Message aaya yaha se vaha in cache.cc\n",
+                pkt->print());
+	}
 
     if (pkt->cacheResponding()) {
         // a cache above us (but not where the packet came from) is

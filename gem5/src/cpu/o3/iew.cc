@@ -460,7 +460,8 @@ IEW::squashDueToBranch(const DynInstPtr& inst, ThreadID tid)
             "\n", tid, inst->seqNum, inst->pcState() );
 	RequestPort *port = dynamic_cast<RequestPort*>(&ldstQueue.getDataPort());
 	//bool isSnooping = port->isSnooping();
-	RequestPtr request_new = new Request(0x00, 0x00, Request::CLEAN, cpu->dataRequestorId());
+	//RequestPtr request_new = new Request(0x00, 0x00, Request::INVALIDATE, cpu->dataRequestorId());
+	RequestPtr request_new = std::make_shared<Request>(0x00, 0x00, Request::INVALIDATE, cpu->dataRequestorId());
 	//RequestPtr request_new = Request::createMemManagement(
           //   Request::CLEAN, cpu->dataRequestorId());
     PacketPtr data_pkt = new Packet(request_new,
