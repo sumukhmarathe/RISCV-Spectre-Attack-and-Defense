@@ -14,7 +14,7 @@
 #include "cache.h"
 #include "encoding.h"
 
-#define CACHE_HIT_THRESHOLD 50
+#define CACHE_HIT_THRESHOLD 40
 // Changes End
 
 /********************************************************************
@@ -68,7 +68,7 @@ void readMemoryByte(size_t malicious_x, uint8_t value[2], int score[2]) {
 
   for (i = 0; i < 256; i++)
     results[i] = 0;
-  for (tries = 999; tries > 0; tries--) {
+  for (tries = 9; tries > 0; tries--) {
 
     /* Flush array2[256*(0..255)] from cache */
     for (i = 0; i < 256; i++)
