@@ -458,12 +458,11 @@ IEW::squashDueToBranch(const DynInstPtr& inst, ThreadID tid)
     DPRINTF(IEW, "[tid:%i] [sn:%llu] Squashing from a specific instruction,"
             " PC: %s "
             "\n", tid, inst->seqNum, inst->pcState() );
-	RequestPort *port = dynamic_cast<RequestPort*>(&ldstQueue.getDataPort());
-	//bool isSnooping = port->isSnooping();
-	//RequestPtr request_new = new Request(0x00, 0x00, Request::INVALIDATE, cpu->dataRequestorId());
-	RequestPtr request_new = std::make_shared<Request>(0x00, 0x00, Request::INVALIDATE, cpu->dataRequestorId());
-	//RequestPtr request_new = Request::createMemManagement(
-          //   Request::CLEAN, cpu->dataRequestorId());
+    RequestPort *port = dynamic_cast<RequestPort*>(&ldstQueue.getDataPort());
+    //RequestPtr request_new = new Request(0x00, 0x00, Request::INVALIDATE, cpu->dataRequestorId());
+    RequestPtr request_new = std::make_shared<Request>(0x00, 0x00, Request::INVALIDATE, cpu->dataRequestorId());
+    //RequestPtr request_new = Request::createMemManagement(
+    //   Request::CLEAN, cpu->dataRequestorId());
     PacketPtr data_pkt = new Packet(request_new,
                         MemCmd::FlushReq);
     //request = dynamic_cast<Request*>(data_pkt->senderState);

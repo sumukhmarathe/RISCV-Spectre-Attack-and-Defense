@@ -412,10 +412,10 @@ BaseCache::recvTimingReq(PacketPtr pkt)
             
     //DPRINTF(DebugFlagTestOne, "Base Timing Req\n",
     //            pkt->print());
-DPRINTF(Cache, "Base.cc recvTiming");
+    DPRINTF(Cache, "Base.cc recvTimingReq");
 	if (pkt->cmd == MemCmd::FlushReq)
 	{
-		DPRINTF(Cache, "Chala BC, Message aaya yaha se vaha in base.cc\n",
+		DPRINTF(Cache, "Received FlushReq Coommand in base.cc\n",
                 pkt->print());
                 memWriteback();
                 memInvalidate();
@@ -1813,7 +1813,7 @@ BaseCache::memWriteback()
 void
 BaseCache::memInvalidate()
 {
-    DPRINTF(Cache, "reached mem invalidate in base.cc\n");
+    DPRINTF(Cache, "Reached memInvalidate() in base.cc\n");
     tags->forEachBlk([this](CacheBlk &blk) { invalidateVisitor(blk); });
 }
 

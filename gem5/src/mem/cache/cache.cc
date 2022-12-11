@@ -408,13 +408,13 @@ Cache::recvTimingReq(PacketPtr pkt)
 {
     DPRINTF(CacheTags, "%s tags:\n%s\n", __func__, tags->print());
     
-    DPRINTF(Cache, "Cache.cc recvTiming");
+    DPRINTF(Cache, "Cache.cc recvTimingReq");
 
     promoteWholeLineWrites(pkt);
     
     if (pkt->cmd == MemCmd::FlushReq)
 	{
-		DPRINTF(Cache, "Chala BC, Message aaya yaha se vaha in cache.cc\n",
+		DPRINTF(Cache, "Received FlushReq Command in cache.cc\n",
                 pkt->print());
 	}
 
