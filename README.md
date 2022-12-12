@@ -12,7 +12,7 @@ In this tutorial you will recreate Spectre v1 attack on RISC-V and run a baselin
 * [Modify system configuration in unmodified to enable Speculative execution](#modify-system-configuration-in-unmodified-to-enable-speculative-execution)
 * [Build gem5 Executable with Cache Flush defense](#build-gem5-executable-with-cache-flush-defense)
 * [Build RISC-V Cross Compiler](#build-risc-v-cross-compiler)
-* [Compile Spectre v1 attack code](#compile-spectrev1-attack-code)
+* [Compile Spectre v1 attack code](#compile-spectre-v1-attack-code)
 * [Run Spectre v1 attack on unmodified RISC-V OoO core](#run-spectre-v1-attack-on-unmodified-risc-v-ooo-core)
 * [Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense](#run-spectre-v1-attack-on-risc-v-ooo-core-with-cache-flush-defense)
 
@@ -90,7 +90,7 @@ make linux -j$(nproc)
 export PATH=$PATH:/opt/riscv/bin/
 ```
 
-### Compile Spectre v1 attack code
+## Compile Spectre v1 attack code
 Run the following commands from root of this repository to compile Spectre v1 attack code
 
 ```shell
@@ -114,5 +114,5 @@ Run the following commands from root of this repository to run Spectre v1 attack
 Run the following commands from root of this repository to run Spectre v1 attack on a RISC-V core with Cache Flush defense
 
 ```shell
-./gem5/build/RISCV/gem5.opt configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
+./gem5_cache_flush_defense/build/RISCV/gem5.opt configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
 ```
