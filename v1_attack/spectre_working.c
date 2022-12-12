@@ -2,15 +2,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-// Changes Start
-// #ifdef _MSC_VER
-// #include <intrin.h> /* for rdtscp and clflush */
-// #pragma optimize("gt",on)
-// #else
-// #include <x86intrin.h> /* for rdtscp and clflush */
-// #endif
+// Code based on the original spectre attack code
 
-//Add RISC files
+//Add RISCV Specific files
 #include "cache.h"
 #include "encoding.h"
 
@@ -43,7 +37,7 @@ uint8_t array1[160] = {
 uint8_t unused2[64];
 uint8_t array2[256 * 512];
 
-char * secret = "The Magic Words are Squeamish Ossifrage.";
+char * secret = "Do or Do not. There is no try!";
 
 uint8_t temp = 0; /* Used so compiler won’t optimize out victim_function() */
 
