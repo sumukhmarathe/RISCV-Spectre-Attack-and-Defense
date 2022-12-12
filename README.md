@@ -9,6 +9,7 @@ In this tutorial you will recreate Spectre v1 attack on RISC-V and run a baselin
 * [Cloning the Repo](#cloning-the-repo)
 * [Install gem5 dependencies](#install-gem5-dependencies)
 * [Build Unmodified gem5 Executable](#build-unmodified-gem5-executable)
+* [Modify system configuration in unmodified to enable Speculative execution](#modify-system-configuration-in-unmodified-to-enable-speculative-execution)
 * [Build gem5 Executable with Cache Flush defense](#build-gem5-executable-with-cache-flush-defense)
 * [Build RISC-V Cross Compiler](#build-risc-v-cross-compiler)
 * [Compile Spectre v1 attack code](#compile-spectrev1-attack-code)
@@ -46,6 +47,16 @@ From the root of this repository, run the following command to build gem5 execut
 cd gem5
 scons build/RISCV/gem5.opt -j$(nproc)
 ```
+## Modify system configuration in unmodified to enable Speculative execution
+From the root of this folder run the following command to open the file `two_level.py`
+
+```shell
+cd gem5/configs/learning_gem5/part1
+gedit two_level.py
+```
+Replace line 83 ```system.cpu = TimingSimpleCPU() ```  to  ``` system.cpu = DerivO3CPU(branchPred=LTAGE()) ``` \
+This changes the cpu of the RISC-V core you would be simulating from an in-order CPU to an out-of-order CPU with LTAGE Branch Predictor
+
 
 ## Build gem5 Executable with Cache Flush defense
 From the root of this repository, run the following command to build gem5 executable which enables cache flush defense
@@ -86,13 +97,22 @@ Run the following commands from root of this repository to compile Spectre v1 at
 cd v1_attack
 riscv64-unknown-linux-gnu-gcc spectre_working.c -o spectre_working  -static
 ```
-> Note: There might be an error at this step as the compiler binary naming can differ from system to system, follow these steps to get binary name
+> Note: There might be an error at this step as the compiler binary naming can differ from system to system, follow these steps to get binary name:
 > * Run the following commands
-> * ``` shell cd /opt/riscv/bin ```
-> * ``` shell find | grep '^./riscv64-unknown.*gcc$' ```
+> * ``` cd /opt/riscv/bin ```
+> * ``` find | grep '^./riscv64-unknown.*gcc$' ```
 > * Use the filename of the binary found in the above step instead of riscv64-unknown-linux-gnu-gcc
 
-Run the following command from v1_attack folder to compile the attack code
-```console
-riscv64-unknown-linux-gnu-gcc spectre_working.c -o spectre_working  -static
+### Run Spectre v1 attack on unmodified RISC-V OoO core
+Run the following commands from root of this repository to run Spectre v1 attack on unmodified gem5
+
+```shell
+./gem5/build/RISCV/gem5.opt configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
+```
+
+### Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense
+Run the following commands from root of this repository to run Spectre v1 attack on a RISC-V core with Cache Flush defense
+
+```shell
+./gem5/build/RISCV/gem5.opt configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
 ```
