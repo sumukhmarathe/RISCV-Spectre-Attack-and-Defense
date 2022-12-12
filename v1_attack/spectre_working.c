@@ -8,7 +8,7 @@
 #include "cache.h"
 #include "encoding.h"
 
-#define CACHE_HIT_THRESHOLD 40
+#define CACHE_HIT_THRESHOLD 50
 
 /********************************************************************
 Victim code.
