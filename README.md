@@ -109,10 +109,14 @@ Run the following commands from root of this repository to run Spectre v1 attack
 ```shell
 ./gem5/build/RISCV/gem5.opt ./gem5/configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
 ```
-
+You should see the following output which shows that the secret key "Do or do not. There is no try!" is extracted via the side-channel attack
+![Spectre Attack working](docs/media/spectre_working.png)
 ### Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense
 Run the following commands from root of this repository to run Spectre v1 attack on a RISC-V core with Cache Flush defense
 
 ```shell
 ./gem5_cache_flush_defense/build/RISCV/gem5.opt ./gem5_cache_flush_defense/configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
 ```
+
+You should see the following output which shows that the attack was defended successfully
+![Spectre Attack defended succesfully](docs/media/spectre_defense.png)
