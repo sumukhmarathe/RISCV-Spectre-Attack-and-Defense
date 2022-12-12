@@ -79,6 +79,18 @@ make linux -j$(nproc)
 export PATH=$PATH:/opt/riscv/bin/
 ```
 
+### Compile Spectre v1 attack code
+Run the following commands from root of this repository to compile Spectre v1 attack code
+
+```shell
+cd v1_attack
+riscv64-unknown-linux-gnu-gcc spectre_working.c -o spectre_working  -static
+```
+> Note: There might be an error at this step as the compiler binary naming can differ from system to system, follow these steps to get binary name
+> * Run the following commands
+> * ``` shell cd /opt/riscv/bin ```
+> * ``` shell find | grep '^./riscv64-unknown.*gcc$' ```
+> * Use the filename of the binary found in the above step instead of riscv64-unknown-linux-gnu-gcc
 
 Run the following command from v1_attack folder to compile the attack code
 ```console
