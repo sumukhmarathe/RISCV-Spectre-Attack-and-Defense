@@ -107,12 +107,12 @@ riscv64-unknown-linux-gnu-gcc spectre_working.c -o spectre_working  -static
 Run the following commands from root of this repository to run Spectre v1 attack on unmodified gem5
 
 ```shell
-./gem5/build/RISCV/gem5.opt configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
+./gem5/build/RISCV/gem5.opt ./gem5/configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
 ```
 
 ### Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense
 Run the following commands from root of this repository to run Spectre v1 attack on a RISC-V core with Cache Flush defense
 
 ```shell
-./gem5_cache_flush_defense/build/RISCV/gem5.opt configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
+./gem5_cache_flush_defense/build/RISCV/gem5.opt ./gem5_cache_flush_defense/configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_working
 ```
