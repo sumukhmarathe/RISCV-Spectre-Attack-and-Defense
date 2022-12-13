@@ -112,7 +112,7 @@ https://github.com/sumukhmarathe/RISCV-Spectre-Attack-and-Defense/blob/83fcf2bb7
     > * ``` find | grep '^./riscv64-unknown.*gcc$' ```
     > * Use the filename of the binary found in the above step instead of riscv64-unknown-linux-gnu-gcc
 
-### Run Spectre v1 attack on unmodified RISC-V OoO core
+## Run Spectre v1 attack on unmodified RISC-V OoO core
 Run the following commands from root of this repository to run Spectre v1 attack on unmodified gem5
 
 ```shell
@@ -121,7 +121,26 @@ Run the following commands from root of this repository to run Spectre v1 attack
 You should see the following output which shows that the secret key "Do or do not. There is no try!" is extracted via the side-channel attack
 
 ![Spectre Attack working](docs/media/spectre_working.png)
-### Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense
+
+## Run Spectre v1 attack on RISC-V OoO core with LFENCE defense
+*This showcases a proof-of-concept for a software based defense of Spectre v1 attack on RISC-V*
+
+Run the following commands from root of this repository to run Spectre v1 attack with a manually added LFENCE on a RISC-V core
+
+```shell
+./gem5/build/RISCV/gem5.opt ./gem5/configs/learning_gem5/part1/two_level.py ./v1_attack/spectre_with_fence
+```
+
+You should see the following output which shows that the attack was defended successfully
+
+![Spectre Attack defended succesfully](docs/media/spectre_defense.png)
+
+## Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense
+*This showcases a proof-of-concept for a hardware based defense of Spectre v1 attack on RISC-V*
+
+* This defense implements a Cache Flush everytime a branch is mispredicted and squashed
+* To see the gem5 files that are updated, run these commands from root of directory ``` diff -qr gem5/src/cpu gem5_cache_flush_defense/src/cpu ``` and ``` diff -qr gem5/src/mem gem5_cache_flush_defense/src/mem ``` 
+
 Run the following commands from root of this repository to run Spectre v1 attack on a RISC-V core with Cache Flush defense
 
 ```shell
