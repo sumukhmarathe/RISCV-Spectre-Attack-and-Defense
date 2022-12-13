@@ -27,7 +27,7 @@ Clone the following repo to download all sample code
 To clone the repo, run the following command:
 
 ```shell
-git clone --recursive https://github.com/sumukhmarathe/RISCV-Spectre-Attack-and-Defense.git
+git clone https://github.com/sumukhmarathe/RISCV-Spectre-Attack-and-Defense.git
 ```
 
 ## Install gem5 dependencies
