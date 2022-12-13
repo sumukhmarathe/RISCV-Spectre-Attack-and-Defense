@@ -12,7 +12,9 @@ In this tutorial you will recreate Spectre v1 attack on RISC-V and run a baselin
 * [Build gem5 Executable with Cache Flush defense](#build-gem5-executable-with-cache-flush-defense)
 * [Build RISC-V Cross Compiler](#build-risc-v-cross-compiler)
 * [Compile Spectre v1 attack code](#compile-spectre-v1-attack-code)
+* [Compile Spectre v1 attack code with LFENCE defense](#compile-spectre-v1-attack-code-with-lfence-defense)
 * [Run Spectre v1 attack on unmodified RISC-V OoO core](#run-spectre-v1-attack-on-unmodified-risc-v-ooo-core)
+* [Run Spectre v1 attack on RISC-V OoO core with LFENCE defense](#run-spectre-v1-attack-on-risc-v-ooo-core-with-lfence-flush-defense)
 * [Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense](#run-spectre-v1-attack-on-risc-v-ooo-core-with-cache-flush-defense)
 
 ## Prerequisites
@@ -91,6 +93,24 @@ riscv64-unknown-linux-gnu-gcc spectre_working.c -o spectre_working  -static
 > * ``` cd /opt/riscv/bin ```
 > * ``` find | grep '^./riscv64-unknown.*gcc$' ```
 > * Use the filename of the binary found in the above step instead of riscv64-unknown-linux-gnu-gcc
+
+## Compile Spectre v1 attack code with LFENCE defense
+
+* This is a proof-of-concept to showcase that the LFENCE R,R instruction can defend against Spectre v1 attacks
+* The following line is added manually in the victim function in the attack code seen in previous step
+https://github.com/sumukhmarathe/RISCV-Spectre-Attack-and-Defense/blob/83fcf2bb7d7f3b584b3b0056b4349dc86e3f5c26/v1_attack/spectre_with_fence.c#L45
+
+* Similar to the previous step, run the following commands from root of this repository to compile Spectre v1 attack code with LFENCE instruction which serializes execution of loads after branch
+
+    ```shell
+    cd v1_attack
+    riscv64-unknown-linux-gnu-gcc spectre_with_fence.c -o spectre_with_fence  -static
+    ```
+    > Note: There might be an error at this step as the compiler binary naming can differ from system to system, follow these steps to get binary name:
+    > * Run the following commands
+    > * ``` cd /opt/riscv/bin ```
+    > * ``` find | grep '^./riscv64-unknown.*gcc$' ```
+    > * Use the filename of the binary found in the above step instead of riscv64-unknown-linux-gnu-gcc
 
 ### Run Spectre v1 attack on unmodified RISC-V OoO core
 Run the following commands from root of this repository to run Spectre v1 attack on unmodified gem5
