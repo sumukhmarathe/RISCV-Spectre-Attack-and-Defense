@@ -16,6 +16,7 @@ In this tutorial you will recreate Spectre v1 attack on RISC-V and run a baselin
 * [Run Spectre v1 attack on unmodified RISC-V OoO core](#run-spectre-v1-attack-on-unmodified-risc-v-ooo-core)
 * [Run Spectre v1 attack on RISC-V OoO core with LFENCE defense](#run-spectre-v1-attack-on-risc-v-ooo-core-with-lfence-defense)
 * [Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense](#run-spectre-v1-attack-on-risc-v-ooo-core-with-cache-flush-defense)
+* [Run Benchmarks to analyse overheads of baseline Spectre v1 defenses](#run-benchmarks-to-analyse-overheads-of-baseline-spectre-v1-defenses)
 
 ## Prerequisites
 
@@ -150,3 +151,21 @@ Run the following commands from root of this repository to run Spectre v1 attack
 You should see the following output which shows that the attack was defended successfully
 
 ![Spectre Attack defended succesfully](docs/media/spectre_defense.png)
+
+## Run Benchmarks to analyse overheads of baseline Spectre v1 defenses
+* This [script](https://github.com/sumukhmarathe/RISCV-Spectre-Attack-and-Defense/blob/main/benchmark_scripts/MAIN_SCRIPT.sh) analyses performance overheads of the implemented defenses by running it on a set of benchmarking programs found in this [folder](https://github.com/sumukhmarathe/RISCV-Spectre-Attack-and-Defense/tree/main/benchmark_codes)
+* The script needs the name of binary of the RISC-V compiler. Run the following commands to fetch the name
+    ``` shell
+    cd /opt/riscv/bin
+    find | grep '^./riscv64-unknown.*gcc$'
+    ```
+* With the name of binary of compiler found, run the following commands from the root of the repository
+
+    ```shell
+    cd benchmark_scripts
+    chmod +x MAIN_SCRIPT.sh 
+    ```
+    ```shell
+    ./MAIN_SCRIPT.sh {Name of binary of RISC-V Compiler}
+    ```
+* The output of the computed runtimes is stored in the file `runtimes_compiled.txt` in the folder `benchmark_scripts`
