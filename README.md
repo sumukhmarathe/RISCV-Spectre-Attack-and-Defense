@@ -9,7 +9,6 @@ In this tutorial you will recreate Spectre v1 attack on RISC-V and run a baselin
 * [Cloning the Repo](#cloning-the-repo)
 * [Install gem5 dependencies](#install-gem5-dependencies)
 * [Build Unmodified gem5 Executable](#build-unmodified-gem5-executable)
-* [Modify system configuration in unmodified to enable Speculative execution](#modify-system-configuration-in-unmodified-to-enable-speculative-execution)
 * [Build gem5 Executable with Cache Flush defense](#build-gem5-executable-with-cache-flush-defense)
 * [Build RISC-V Cross Compiler](#build-risc-v-cross-compiler)
 * [Compile Spectre v1 attack code](#compile-spectre-v1-attack-code)
@@ -47,16 +46,6 @@ From the root of this repository, run the following command to build gem5 execut
 cd gem5
 scons build/RISCV/gem5.opt -j$(nproc)
 ```
-## Modify system configuration in unmodified to enable Speculative execution
-From the root of this folder run the following command to open the file `two_level.py`
-
-```shell
-cd gem5/configs/learning_gem5/part1
-gedit two_level.py
-```
-Replace line 83 ```system.cpu = TimingSimpleCPU() ```  to  ``` system.cpu = DerivO3CPU(branchPred=LTAGE()) ``` \
-This changes the cpu of the RISC-V core you would be simulating from an in-order CPU to an out-of-order CPU with LTAGE Branch Predictor
-
 
 ## Build gem5 Executable with Cache Flush defense
 From the root of this repository, run the following command to build gem5 executable which enables cache flush defense
