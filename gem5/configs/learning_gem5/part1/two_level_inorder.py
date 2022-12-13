@@ -79,8 +79,8 @@ system.clk_domain.voltage_domain = VoltageDomain()
 system.mem_mode = 'timing'               # Use timing accesses
 system.mem_ranges = [AddrRange('512MB')] # Create an address range
 
-# Create an OoO cpu with LTAGE branch predictor
-system.cpu = DerivO3CPU(branchPred=LTAGE())
+# Create a simple CPU
+system.cpu = TimingSimpleCPU()
 
 # Create an L1 instruction and data cache
 system.cpu.icache = L1ICache(args)
