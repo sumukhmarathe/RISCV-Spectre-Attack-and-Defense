@@ -14,7 +14,7 @@ In this tutorial you will recreate Spectre v1 attack on RISC-V and run a baselin
 * [Compile Spectre v1 attack code](#compile-spectre-v1-attack-code)
 * [Compile Spectre v1 attack code with LFENCE defense](#compile-spectre-v1-attack-code-with-lfence-defense)
 * [Run Spectre v1 attack on unmodified RISC-V OoO core](#run-spectre-v1-attack-on-unmodified-risc-v-ooo-core)
-* [Run Spectre v1 attack on RISC-V OoO core with LFENCE defense](#run-spectre-v1-attack-on-risc-v-ooo-core-with-lfence-flush-defense)
+* [Run Spectre v1 attack on RISC-V OoO core with LFENCE defense](#run-spectre-v1-attack-on-risc-v-ooo-core-with-lfence-defense)
 * [Run Spectre v1 attack on RISC-V OoO core with Cache Flush defense](#run-spectre-v1-attack-on-risc-v-ooo-core-with-cache-flush-defense)
 
 ## Prerequisites
