@@ -1,2 +1,7 @@
-# Build files
-build/
+benchmark_codes/.zip
+benchmark_codes/baseline_programs/Binaries/
+benchmark_codes/LFENCE_programs/Binaries/
+benchmark_codes/baseline_programs/*.txt
+benchmark_codes/LFENCE_programs/*.txt
+benchmark_scripts/*.txt
+benchmark_scripts/m5out
