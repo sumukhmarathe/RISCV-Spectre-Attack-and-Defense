@@ -1,5 +1,5 @@
 # Getting started with Spectre v1 attack and baseline defense on RISC-V
-**Total completion time**:  15 minutes
+**Total completion time**:  30 minutes
 
 In this tutorial you will recreate Spectre v1 attack on RISC-V and run a baseline Cache Flush defense
 
